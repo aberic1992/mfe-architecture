@@ -1,0 +1,1 @@
+import("./bootstrap"); // we do this to give browser some time to load all the dependencies
