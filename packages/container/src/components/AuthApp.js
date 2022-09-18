@@ -1,15 +1,15 @@
-import { mount } from 'marketing/MarketingApp';
+import { mount } from 'auth/AuthApp';
 import React, { useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 
 export default () => {
-    const marketingAppRef = useRef(null);
+    const authAppRef = useRef(null);
     const history = useHistory(); // copy of our browser routing history in the container app
 
     useEffect(() => {
-        const { onParentNavigate } = mount(marketingAppRef.current, { //onParentNavigate is defined in the bootstrap.js of Marketing app
-            initialPath: history.location.pathname,
+        const { onParentNavigate } = mount(authAppRef.current, { //onParentNavigate is defined in the bootstrap.js of Marketing app
+            initialPath: history.location.pathname, //we did a setup in the bootstrap.js for this 
             onNavigate: ({pathname: nextPathname}) => { // location object has pathname property, also we are renaming pathname to nextPathname
                 const { pathname } = history.location;
 
@@ -22,5 +22,5 @@ export default () => {
         history.listen(onParentNavigate);
     }, []) // only run this once when the component is rendered to the screen
 
-    return <div ref={marketingAppRef} />
+    return <div ref={authAppRef} />
 }

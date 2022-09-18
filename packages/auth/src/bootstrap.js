@@ -7,8 +7,8 @@ import App from './App'
 const mount = (el, { onNavigate, defaultHistory, initialPath }) => { // el -> HTML element passed from development or prod/dev or prod/prod
 
     const history = defaultHistory || createMemoryHistory({ //We are using this to handle proper routing for MFE architecture, default history is for stand alone app in dev environment
-        initialEntries: [initialPath],
-    });
+        initialEntries: [initialPath] //initial path is for solving a bug when accessing not root path like /auth/something
+    }); 
 
     if(onNavigate) { // we need this check because we wont get onNavigate if we are starting marketing app as a standalone instead from the container app
         history.listen(onNavigate);
@@ -32,7 +32,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => { // el -> HT
 //if we are in development and in isolation,
 //call mount immediately
 if (process.env.NODE_ENV === 'development') {
-    const devRoot = document.querySelector('#_marketing-dev-root')
+    const devRoot = document.querySelector('#_auth-dev-root')
 
     if (devRoot) {
         mount(devRoot, { defaultHistory: createBrowserHistory() }); //mount expects second object which is navigate but we are not getting it in the standalone app and we are using browsing history in development mode
