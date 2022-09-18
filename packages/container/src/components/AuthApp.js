@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 
-export default () => {
+export default ({onSignIn}) => {
     const authAppRef = useRef(null);
     const history = useHistory(); // copy of our browser routing history in the container app
 
@@ -16,7 +16,8 @@ export default () => {
                 if(pathname !== nextPathname){ // we need this check to avoid infinite loop of redirecting
                     history.push(nextPathname);
                 }
-            }
+            },
+            onSignIn,
         });
 
         history.listen(onParentNavigate);

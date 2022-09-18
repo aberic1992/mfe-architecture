@@ -4,7 +4,7 @@ import { createMemoryHistory, createBrowserHistory } from 'history';
 import App from './App'
 
 //Mount func to start up the app
-const mount = (el, { onNavigate, defaultHistory, initialPath }) => { // el -> HTML element passed from development or prod/dev or prod/prod
+const mount = (el, {onSignIn, onNavigate, defaultHistory, initialPath }) => { // el -> HTML element passed from development or prod/dev or prod/prod
 
     const history = defaultHistory || createMemoryHistory({ //We are using this to handle proper routing for MFE architecture, default history is for stand alone app in dev environment
         initialEntries: [initialPath] //initial path is for solving a bug when accessing not root path like /auth/something
@@ -15,7 +15,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => { // el -> HT
     }
 
     ReactDOM.render(
-        <App history={history} />,
+        <App onSignIn={onSignIn} history={history} />,
         el
     );
 
